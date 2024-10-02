@@ -1,24 +1,24 @@
-# Webcam Motion Detector
+# 📹 Webcam Motion Detector
 
-A simple Python script that uses OpenCV to detect motion in a webcam feed and record the start and end times of the detected motion.
+A simple yet effective Python script that utilizes **OpenCV** to detect motion in a webcam feed and log the start and end times of detected motion.
 
-## Requirements
+## 🚀 Features
 
-- Python 3.x
-- OpenCV
-- Pandas
+- **Real-time Motion Detection**: Monitors your webcam feed for any movement.
+- **Time Logging**: Records the start and end times of detected motion.
+- **CSV Output**: Saves the recorded time intervals in a structured CSV file for easy analysis.
 
-## Features
+## 🛠️ Requirements
 
-- Detects motion in a webcam feed.
-- Records the start and end times of the detected motion.
-- Saves the recorded time intervals in a CSV file.
+To run this script, ensure you have the following installed:
 
-## Usage
+- **Python 3.x**
+- **OpenCV**
+- **Pandas**
 
-1. Make sure you have Python 3.x installed on your system.
+## 📥 Installation
 
-2. Install the required libraries:
+Follow these steps to set up the required libraries:
 
-   ```bash
-   pip install opencv-python pandas
+```bash
+pip install opencv-python pandas
