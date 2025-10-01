@@ -1,71 +1,69 @@
+import java.util.Arrays;
+
 public class MergeSort {
 
-    public static void mergeSort(int[] arr) {
+    // Generic merge sort for any Comparable type (e.g., Integer, String, etc.)
+    public static <T extends Comparable<T>> void mergeSort(T[] arr) {
         mergeSort(arr, 0, arr.length - 1);
     }
 
-    private static void mergeSort(int[] arr, int left, int right) {
+    private static <T extends Comparable<T>> void mergeSort(T[] arr, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
 
-            // Recursively sort the left and right halves of the array.
+            // Recursively sort the two halves
             mergeSort(arr, left, mid);
             mergeSort(arr, mid + 1, right);
 
-            // Merge the two sorted halves of the array.
+            // Merge sorted halves
             merge(arr, left, mid, right);
         }
     }
 
-    private static void merge(int[] arr, int left, int mid, int right) {
-        // Create two temporary arrays to store the left and right halves of the array.
-        int[] leftTemp = new int[mid - left + 1];
-        int[] rightTemp = new int[right - mid];
+    private static <T extends Comparable<T>> void merge(T[] arr, int left, int mid, int right) {
+        // Create temporary arrays
+        T[] leftTemp = Arrays.copyOfRange(arr, left, mid + 1);
+        T[] rightTemp = Arrays.copyOfRange(arr, mid + 1, right + 1);
 
-        // Copy the left and right halves of the array to the temporary arrays.
-        for (int i = 0; i < mid - left + 1; i++) {
-            leftTemp[i] = arr[left + i];
-        }
-        for (int i = 0; i < right - mid; i++) {
-            rightTemp[i] = arr[mid + 1 + i];
-        }
-
-        // Merge the two temporary arrays back into the original array.
         int i = 0, j = 0, k = left;
+
+        // Merge two sorted halves
         while (i < leftTemp.length && j < rightTemp.length) {
-            if (leftTemp[i] <= rightTemp[j]) {
-                arr[k] = leftTemp[i];
-                i++;
+            if (leftTemp[i].compareTo(rightTemp[j]) <= 0) {
+                arr[k++] = leftTemp[i++];
             } else {
-                arr[k] = rightTemp[j];
-                j++;
+                arr[k++] = rightTemp[j++];
             }
-            k++;
         }
 
-        // Copy any remaining elements from the temporary arrays to the original array.
-        while (i < leftTemp.length) {
-            arr[k] = leftTemp[i];
-            i++;
-            k++;
-        }
-        while (j < rightTemp.length) {
-            arr[k] = rightTemp[j];
-            j++;
-            k++;
-        }
+        // Copy leftovers
+        while (i < leftTemp.length) arr[k++] = leftTemp[i++];
+        while (j < rightTemp.length) arr[k++] = rightTemp[j++];
+    }
+
+    // Utility method for printing arrays
+    private static <T> void printArray(T[] arr) {
+        System.out.println(Arrays.toString(arr));
     }
 
     public static void main(String[] args) {
-        int[] arr = {5, 3, 2, 1, 4};
+        Integer[] numbers = {5, 3, 2, 1, 4};
+        String[] words = {"zebra", "apple", "monkey", "bear"};
 
-        // Merge sort the array.
-        mergeSort(arr);
+        System.out.println("Original numbers: ");
+        printArray(numbers);
 
-        // Print the sorted array.
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
+        mergeSort(numbers);
+
+        System.out.println("Sorted numbers: ");
+        printArray(numbers);
+
+        System.out.println("\nOriginal words: ");
+        printArray(words);
+
+        mergeSort(words);
+
+        System.out.println("Sorted words: ");
+        printArray(words);
     }
 }
